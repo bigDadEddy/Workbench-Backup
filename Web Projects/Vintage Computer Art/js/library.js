@@ -48,3 +48,32 @@ function degToRad(deg) {
     return deg / 180 * Math.PI;
 }
 
+/*class Point{
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+    this.p = createRect(x, y, 2, 2);
+  }
+  
+  get x() {
+    return this.x;
+  }
+  
+  get y() {
+    return this.y;
+  }
+  
+  set x(newX) {
+    this.x = newX;
+    this.p.style.left = newX + 'px';
+  }
+  
+  set y(newY) {
+    this.y = newY;
+    this.p.style.top = newY + 'px';
+  }
+  
+  draw(canvas) {
+    canvas.appendChild(p);
+  }
+}*/
