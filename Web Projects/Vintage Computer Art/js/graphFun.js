@@ -64,5 +64,5 @@ function anim() {
         canvas.removeChild(canvas.firstChild);
     }
     
-    //requestAnimationFrame(anim);
+    requestAnimationFrame(anim);
 }
