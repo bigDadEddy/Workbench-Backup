@@ -1,4 +1,4 @@
-public class RegularPrism implements shape {
+public class RegularPrism implements Shape {
   private int numSides;
   private double height;
   private double apothem;
@@ -20,10 +20,15 @@ public class RegularPrism implements shape {
   public RegularPrism(double apothem, int numSides, double height) {
 	  this(apothem, numSides, height, 2 * apothem * Math.tan(Math.toRadians(180 / numSides))); 
   }
+  
   //returns double length volume 
   public double getVolume() {
 	  return .5 * apothem * numSides * height * sideLength;
   }
   
   //returns double surface area
+  public double getSA() {
+	  return  (apothem * numSides * sideLength) + (sideLength * height * numSides);
+  }
+  
 }
