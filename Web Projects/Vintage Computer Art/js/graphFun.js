@@ -28,7 +28,8 @@ var y3 = oy3;
 var points = [];
 points[0] = createRect(ox, oy, 1, 1); //primes the array
 
-anim();
+//begin animating
+animController();
 
 function anim() {
     
@@ -43,19 +44,18 @@ function anim() {
     canvas.appendChild(tempPoint1);
  // console.log(y1);  
   
-    /*y2 = oy2 + height * Math.sin(degToRad(dDegrees));
+    y2 = oy2 + height * Math.sin(degToRad(dDegrees));
     var tempPoint2 = createRect(x2, y2, 1, 1);
     points.unshift(tempPoint2);
     canvas.appendChild(tempPoint2);
     // console.log(y2);
-    */
-    /*y3 = oy3 + height * Math.sin(degToRad(dDegrees));
+    
+    y3 = oy3 + height * Math.sin(degToRad(dDegrees));
     var tempPoint3 = createRect(x3, y3, 1, 1);
     points.unshift(tempPoint3);
-    canvas.appendChild(tempPoint3);
-    //console.log(y3);
-    //console.log(points.length);
-    */
+    canvas.appendChild(tempPoint3)
+
+    
     for (var i = 0; i < points.length; i++) {
         points[i].style.left = parseInt(points[i].style.left, 10) - speed + "px";
     }
@@ -63,6 +63,4 @@ function anim() {
         points.pop();
         canvas.removeChild(canvas.firstChild);
     }
-    
-    requestAnimationFrame(anim);
 }
