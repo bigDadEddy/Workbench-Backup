@@ -1,7 +1,10 @@
-function createLineElement(x, y, length, angle) {
+/*
+Functions for intuitive drawing
+*/
+function createLineElement(x, y, length, angle, color) {
     var line = document.createElement("div");
     var styles = 'border: 1px solid black; '
-               + 'background-color: white;'
+               + 'background-color: ' + color + ';'
                + 'width: ' + length + 'px; '
                + 'height: 3px; '
                + '-moz-transform: rotate(' + angle + 'rad); '
@@ -15,7 +18,7 @@ function createLineElement(x, y, length, angle) {
     return line;
 }
 
-function createLine(x1, y1, x2, y2) {
+function createLine(x1, y1, x2, y2, color) {
     var a = x1 - x2,
         b = y1 - y2,
         c = Math.sqrt(a * a + b * b);
@@ -28,7 +31,7 @@ function createLine(x1, y1, x2, y2) {
 
     var alpha = Math.PI - Math.atan2(-b, a);
 
-    return createLineElement(x, y, c, alpha);
+    return createLineElement(x, y, c, alpha, color);
 }
 
 function createRect(x, y, width, height) {
@@ -44,36 +47,36 @@ function createRect(x, y, width, height) {
     return rect;
 }
 
+function rgbToHex(r, g, b) {
+	return "#" + ((r).toString(16).length < 2 ? "0" + (r).toString(16) : (r).toString(16))
+			   + ((g).toString(16).length < 2 ? "0" + (g).toString(16) : (g).toString(16))
+			   + ((b).toString(16).length < 2 ? "0" + (b).toString(16) : (b).toString(16));
+}
+/*
+handy math functions
+*/
 function degToRad(deg) {
     return deg / 180 * Math.PI;
 }
 
-/*class Point{
-  constructor(x, y){
-    this.x = x;
-    this.y = y;
-    this.p = createRect(x, y, 2, 2);
-  }
-  
-  get x() {
-    return this.x;
-  }
-  
-  get y() {
-    return this.y;
-  }
-  
-  set x(newX) {
-    this.x = newX;
-    this.p.style.left = newX + 'px';
-  }
-  
-  set y(newY) {
-    this.y = newY;
-    this.p.style.top = newY + 'px';
-  }
-  
-  draw(canvas) {
-    canvas.appendChild(p);
-  }
-}*/
+function lerp(start, end, alpha) {
+	alpha = alpha < 0 ? 0 : alpha;
+	alpha = alpha > 1 ? 1 : alpha;
+	return start + (end - start) * alpha;
+}
+
+/*controls how often the animation method updates
+ * @pre 1 <= speed <= 100, 100 is full speed 
+ * always initialize counter to 1
+*/
+function animController(func, speed, counter) {
+	gapBetweenUpdates = Math.floor(100.0 / speed);
+	if (counter % gapBetweenUpdates == 0) {
+		func();	
+	}
+	requestAnimationFrame(function() { animController(func, speed, (counter%100)+1) });
+}
+//animController helper method
+function startAnim(func, speed) {
+	animController(func, speed, 1);
+}
